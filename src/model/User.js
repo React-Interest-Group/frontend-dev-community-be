@@ -1,4 +1,4 @@
-import mongoose from '../config/DBHelper';
+import mongoose from '@/config/DBHelper';
 
 /**
  * 在Mongoose中，使用Schema(模板)和Model(模型)来定义MongoDB中的collection(集合)。
@@ -9,11 +9,13 @@ import mongoose from '../config/DBHelper';
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
-  email: { type: String },
-  password: { type: Number }
+  username: { type: String },
+  name: { type: String },
+  password: { type: String },
+  created: { type: String }
 });
 
 // 链接数据库的collection， users表示collection的名称，UserSchema表示collection的数据结构
-const TestModel = mongoose.model('users', UserSchema);
+const UserModel = mongoose.model('users', UserSchema);
 
-export default TestModel;
+export default UserModel;

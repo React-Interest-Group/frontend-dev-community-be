@@ -18,9 +18,6 @@ const router = new Router();
 
 const isDevMode = process.env.NODE_ENV === 'production' ? false : true;
 
-// 路径前缀
-router.prefix('/api');
-
 // 定义无需JWT鉴权的公共路径
 const jwt = JWT({ secret: config.JWT_SECRET }).unless({ path: [/^\/public/, /^\/login/] });
 
@@ -46,11 +43,11 @@ if (!isDevMode) {
 }
 
 app.use(middleware);
+
+// 将定义的路由里面的方法添加到app应用上，作为中间件进行处理
 app.use(allRouter());
 
 app
-  // 将前面定义的路由里面的方法添加到app应用上，作为中间件进行处理
-  .use(router.routes())
   // 拦截器，拦截应用中没有的请求，返回4xx错误或者5xx错误
   .use(router.allowedMethods());
 
